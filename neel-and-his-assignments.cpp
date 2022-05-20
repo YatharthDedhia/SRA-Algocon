@@ -7,42 +7,73 @@ using namespace std;
 
 int main()
 {
-    int t,i,j,k,l,m,n;
-    int N[t],H[t],hours[t][100],marks[t][100];
+    int t,i,j,k,l,m,z,x,hrsum,marksum,counter=0;
+    int size =1000;
+    int N[size],H[size],hours[size][size],marks[size][size],ans[size];
     cin>>t;
 
     //test case loop
     for(i=0;i<t;i++)
     {
+        ans[i]=0;
+        counter=0;
         //N H
         cin>>N[i]>>H[i];
 
         //Hours of each assignment loop
         for(j=0;j<N[i];j++)
         {
-            cout<<"Enter A"<<j+1<<" hours: ";
             cin>>hours[i][j];
         }
 
         //Marks of each assignment loop
         for(k=0;k<N[i];k++)
         {
-            cout<<"Enter A"<<k+1<<" marks: ";
             cin>>marks[i][k];
         }
         
-        cout<<endl<<N[i]<<endl<<H[i]<<endl<<hours[i][0]<<endl<<hours[i][1]<<endl<<marks[i][0]<<endl<<marks[i][1];
-        /*for(n=0;n<N[i];n++)
+//---------------INPUT OVER--------------------
+
+        for(l=0;l<N[i];l++)
         {
-            if(hours[i][n]>H[i])
+            for(m=l+1;m<N[i];m++)
             {
-                cout<<0;
+                hrsum = hours[i][l]+hours[i][m];
+                if(hrsum<=H[i])
+                {
+                    marksum=marks[i][l]+marks[i][m];
+                    ans[i] = max(ans[i],marksum);
+                    //cout<<anssumarr[l]<<endl;
+                }
+                else{continue;}
             }
-            else
+        }
+
+        for(z=0;z<N[i];z++)
+        {
+            if(hours[i][z]<H[i])
             {
-                cout<<1;
+                counter++;
             }
-        }*/
+        }
+
+        if(counter == 1)
+        {
+            for(x=0;x<N[i];x++)
+            {
+                if(hours[i][x]<H[i])
+                {
+                    ans[i]=marks[i][x];
+                }
+            }
+        }
     }
+
+    //printing ans
+    for(i=0;i<t;i++)
+    {
+        cout<<ans[i]<<endl;
+    }
+
     return 0;
 }
