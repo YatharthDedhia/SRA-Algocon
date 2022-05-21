@@ -33,22 +33,22 @@ int main()
         }
         
 //---------------INPUT OVER--------------------
-
+        
         for(l=0;l<N[i];l++)
         {
             for(m=l+1;m<N[i];m++)
             {
-                hrsum = hours[i][l]+hours[i][m];
+                hrsum = hours[i][l]+hours[i][m];//sum of 2 assignments hours
+                //condition that sum of the hours is less than the time to ESE
                 if(hrsum<=H[i])
                 {
                     marksum=marks[i][l]+marks[i][m];
-                    ans[i] = max(ans[i],marksum);
-                    //cout<<anssumarr[l]<<endl;
+                    ans[i] = max(ans[i],marksum); //ans is the maximum of the sum of marks 
                 }
-                else{continue;}
             }
         }
 
+        //check for the condition where only 1 assignment is possible in the given time
         for(z=0;z<N[i];z++)
         {
             if(hours[i][z]<H[i])
@@ -57,6 +57,7 @@ int main()
             }
         }
 
+        //if only one assignment can be done in the given time, that assignment will have the smallest time
         if(counter == 1)
         {
             for(x=0;x<N[i];x++)
